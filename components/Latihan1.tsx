@@ -7,7 +7,7 @@ export default function Latihan1() {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "grey",
+        backgroundColor: "#d2d2d2ff",
         padding: 20,
       }}
     >
@@ -23,12 +23,13 @@ export default function Latihan1() {
           borderRadius: 10,
         }}
       >
-        <Text style={{ height: 25, marginTop: 10 }}>Name</Text>
+        <Text style={{ height: 25 }}>Name</Text>
         <TextInput
           placeholder="Insert Name"
           style={{
             borderWidth: 1,
             borderRadius: 5,
+            paddingHorizontal: 8,
           }}
         />
         <Text style={{ height: 25, marginTop: 10 }}>Age</Text>
@@ -37,6 +38,7 @@ export default function Latihan1() {
           style={{
             borderWidth: 1,
             borderRadius: 5,
+            paddingHorizontal: 8,
           }}
         />
         <Text style={{ height: 25, marginTop: 10 }}>Class</Text>
@@ -45,6 +47,7 @@ export default function Latihan1() {
           style={{
             borderWidth: 1,
             borderRadius: 5,
+            paddingHorizontal: 8,
           }}
         />
         <Text style={{ height: 25, marginTop: 10 }}>Address</Text>
@@ -53,6 +56,7 @@ export default function Latihan1() {
           style={{
             borderWidth: 1,
             borderRadius: 5,
+            paddingHorizontal: 8,
           }}
         />
       </View>
