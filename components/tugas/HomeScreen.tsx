@@ -2,6 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import {
   FlatList,
   Image,
+  ImageSourcePropType,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -12,35 +13,28 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const notes = [
   {
     id: 1,
-    image: "@/assets/images/kodeinNotesLogo.png",
+    image: require("@/assets/images/image-1.png"),
     title: "Belajar mobile app",
     description: "Membuat aplikasi mobile",
     date: "29 Oktober 2025",
   },
   {
     id: 2,
-    image: "@/assets/images/kodeinNotesLogo.png",
+    image: require("@/assets/images/image-2.png"),
     title: "Belajar mobile app",
     description: "Membuat aplikasi mobile",
     date: "30 Oktober 2025",
   },
   {
     id: 3,
-    image: "@/assets/images/kodeinNotesLogo.png",
+    image: require("@/assets/images/image-3.png"),
     title: "Belajar Backend",
     description: "Membuat aplikasi mobile",
     date: "2 November 2025",
   },
   {
     id: 4,
-    image: "@/assets/images/kodeinNotesLogo.png",
-    title: "Belajar Backend",
-    description: "Membuat aplikasi mobile",
-    date: "2 November 2025",
-  },
-  {
-    id: 5,
-    image: "@/assets/images/kodeinNotesLogo.png",
+    image: require("@/assets/images/image-4.png"),
     title: "Belajar Backend",
     description: "Membuat aplikasi mobile",
     date: "2 November 2025",
@@ -49,7 +43,7 @@ const notes = [
 
 type Note = {
   id: number;
-  image: string;
+  image: ImageSourcePropType | { uri: string };
   title: string;
   description: string;
   date: string;
@@ -58,10 +52,7 @@ type Note = {
 const NoteItem = ({ item }: { item: Note }) => {
   return (
     <View style={styles.card}>
-      <Image
-        source={require("@/assets/images/kodeinNotesLogo.png")}
-        style={{ width: 80, height: 80 }}
-      />
+      <Image style={{ width: 80, height: 80 }} source={item.image} />
       <View style={styles.cardContainer}>
         <Text style={styles.cardTitle}>{item.title}</Text>
         <Text style={styles.cardDesc}>{item.description}</Text>
@@ -88,6 +79,7 @@ export default function HomeScreen() {
           renderItem={({ item }) => <NoteItem item={item} />}
           keyExtractor={(item) => item.id.toString()}
           contentContainerStyle={{ gap: 15 }}
+          ListEmptyComponent={() => <EmptyData />}
         />
       </View>
       <TouchableOpacity style={styles.fab}>
@@ -96,6 +88,14 @@ export default function HomeScreen() {
     </SafeAreaView>
   );
 }
+
+const EmptyData = () => {
+  return (
+    <View>
+      <Text>Data Kosong</Text>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
