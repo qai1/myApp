@@ -39,6 +39,48 @@ const notes = [
     description: "Membuat aplikasi mobile",
     date: "2 November 2025",
   },
+  {
+    id: 5,
+    image: require("@/assets/images/image-4.png"),
+    title: "Belajar Backend",
+    description: "Membuat aplikasi mobile",
+    date: "2 November 2025",
+  },
+  {
+    id: 6,
+    image: require("@/assets/images/image-4.png"),
+    title: "Belajar Backend",
+    description: "Membuat aplikasi mobile",
+    date: "2 November 2025",
+  },
+  {
+    id: 7,
+    image: require("@/assets/images/image-4.png"),
+    title: "Belajar Backend",
+    description: "Membuat aplikasi mobile",
+    date: "2 November 2025",
+  },
+  {
+    id: 8,
+    image: require("@/assets/images/image-1.png"),
+    title: "Belajar mobile app",
+    description: "Membuat aplikasi mobile",
+    date: "29 Oktober 2025",
+  },
+  {
+    id: 9,
+    image: require("@/assets/images/image-2.png"),
+    title: "Belajar mobile app",
+    description: "Membuat aplikasi mobile",
+    date: "30 Oktober 2025",
+  },
+  {
+    id: 10,
+    image: require("@/assets/images/image-3.png"),
+    title: "Belajar Backend",
+    description: "Membuat aplikasi mobile",
+    date: "2 November 2025",
+  },
 ];
 
 type Note = {
@@ -78,7 +120,7 @@ export default function HomeScreen() {
           data={notes}
           renderItem={({ item }) => <NoteItem item={item} />}
           keyExtractor={(item) => item.id.toString()}
-          contentContainerStyle={{ gap: 15 }}
+          contentContainerStyle={{ gap: 15, flexGrow: 1 }}
           ListEmptyComponent={() => <EmptyData />}
         />
       </View>
@@ -91,8 +133,15 @@ export default function HomeScreen() {
 
 const EmptyData = () => {
   return (
-    <View>
-      <Text>Data Kosong</Text>
+    <View style={styles.emptyContainer}>
+      <Image
+        style={{ width: 190, height: 190 }}
+        source={require("@/assets/images/emptyIcon.png")}
+      />
+      <Text style={styles.emptyTitle}>Add your first note</Text>
+      <Text style={styles.emptyDesc}>
+        Save your thoughts, tasks or inspiration
+      </Text>
     </View>
   );
 };
@@ -105,7 +154,7 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: "row",
-    gap: 2,
+    gap: 5,
     alignItems: "center",
     backgroundColor: "white",
   },
@@ -120,7 +169,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    paddingTop: 30,
+    paddingTop: 10,
     gap: 10,
   },
   fab: {
@@ -151,5 +200,18 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: "#bbbbbbff",
     marginTop: 10,
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 15,
+  },
+  emptyTitle: { fontSize: 16, fontWeight: "bold", paddingTop: 15 },
+  emptyDesc: {
+    fontSize: 16,
+    maxWidth: 200,
+    textAlign: "center",
+    color: "#CBCBCB",
   },
 });
