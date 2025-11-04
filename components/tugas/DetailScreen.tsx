@@ -1,5 +1,12 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function DetailScreen() {
@@ -28,6 +35,14 @@ export default function DetailScreen() {
           </Text>
         </View>
       </ScrollView>
+      <View style={styles.cardButton}>
+        <TouchableOpacity style={styles.updateButton}>
+          <Text style={styles.textButton}>Update</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.deleteButton}>
+          <Text style={styles.textButton}>Delete</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 }
@@ -62,5 +77,31 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 14,
     textAlign: "justify",
+  },
+  cardButton: {
+    flexDirection: "row",
+    paddingHorizontal: 15,
+    paddingVertical: 15,
+    justifyContent: "space-between",
+    textAlign: "center",
+  },
+  updateButton: {
+    width: 170,
+    height: 48,
+    backgroundColor: "#FF5B13",
+    justifyContent: "center",
+    borderRadius: 10,
+  },
+  deleteButton: {
+    width: 170,
+    height: 48,
+    backgroundColor: "#FF3530",
+    justifyContent: "center",
+    borderRadius: 10,
+  },
+  textButton: {
+    fontSize: 16,
+    textAlign: "center",
+    color: "white",
   },
 });
