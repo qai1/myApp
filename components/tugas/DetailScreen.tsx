@@ -76,6 +76,8 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 14,
+    fontWeight: 500,
+    color: "#828282ff",
     textAlign: "justify",
   },
   cardButton: {
