@@ -1,8 +1,26 @@
 import { Ionicons } from "@expo/vector-icons";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { useState } from "react";
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+const images = [
+  require("@/assets/images/image-1.png"),
+  require("@/assets/images/image-2.png"),
+  require("@/assets/images/image-3.png"),
+  require("@/assets/images/image-4.png"),
+];
+
 export default function AddScreen() {
+  const [selectedImage, setSelectedImage] = useState<number>(0);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.appBar}>
@@ -15,6 +33,29 @@ export default function AddScreen() {
           placeholder="Note Title"
           selectionColor={"#FF5B13"}
         />
+
+        <TextInput
+          style={styles.inputContent}
+          placeholder="Note Content"
+          selectionColor={"#FF5B13"}
+          textAlignVertical="top"
+          multiline={true}
+        />
+
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          {images.map((img, index) => (
+            <TouchableOpacity
+              key={index}
+              style={[
+                styles.boxImage,
+                selectedImage === index && styles.imageSelected,
+              ]}
+              onPress={() => setSelectedImage(index)}
+            >
+              <Image style={styles.image} source={img} />
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
       </View>
     </SafeAreaView>
   );
@@ -43,5 +84,32 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderColor: "#828282ff",
     padding: 15,
+    marginBottom: 10,
+  },
+  inputContent: {
+    borderWidth: 1,
+    borderRadius: 4,
+    borderColor: "#828282ff",
+    padding: 15,
+    marginBottom: 10,
+    height: 100,
+  },
+  boxImage: {
+    height: 100,
+    width: 100,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#828282ff",
+    borderRadius: 4,
+    marginRight: 10,
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+    borderRadius: 8,
+  },
+  imageSelected: {
+    borderColor: "#FF8851",
+    borderWidth: 2,
   },
 });
