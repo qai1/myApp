@@ -18,7 +18,7 @@ const images = [
   require("@/assets/images/image-4.png"),
 ];
 
-export default function AddScreen() {
+export default function UpdateScreen() {
   const [selectedImage, setSelectedImage] = useState<number>(0);
 
   return (
@@ -57,8 +57,8 @@ export default function AddScreen() {
           ))}
         </ScrollView>
       </View>
-      <TouchableOpacity style={styles.addButton}>
-        <Text style={{ textAlign: "center", color: "white" }}>Add</Text>
+      <TouchableOpacity style={styles.updateButton}>
+        <Text style={{ textAlign: "center", color: "white" }}>Update</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     borderColor: "#FF8851",
     borderWidth: 2,
   },
-  addButton: {
+  updateButton: {
     marginTop: "auto",
     height: 48,
     backgroundColor: "#FF5B13",
