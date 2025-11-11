@@ -1,5 +1,6 @@
+import { notes } from "@/data/notesData";
 import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import {
   Image,
   ScrollView,
@@ -12,6 +13,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function DetailScreen() {
   const router = useRouter();
+  const { id } = useLocalSearchParams();
+
+  const note = notes.find((note) => note.id === Number(id));
+  console.log(note);
+
   return (
     <SafeAreaView style={styles.container}>
       <TouchableOpacity style={styles.appBar} onPress={() => router.push("/")}>
@@ -19,22 +25,11 @@ export default function DetailScreen() {
         <Text style={styles.appBarTitle}>Note Details</Text>
       </TouchableOpacity>
       <ScrollView>
-        <Image
-          style={{ width: "100%", height: 190 }}
-          source={require("@/assets/images/image-1.png")}
-        />
+        <Image style={{ width: "100%", height: 190 }} source={note?.image} />
         <View style={styles.content}>
-          <Text style={styles.title}>Belajar Programming</Text>
-          <Text style={styles.date}>Selasa, 13 Mei 2025</Text>
-          <Text style={styles.description}>
-            Mulailah dengan memahami dasar JavaScript seperti fungsi, array, dan
-            async/await. Pelajari konsep component di React dan gunakan
-            functional component serta hooks seperti useState dan useEffect.
-            Bangun proyek kecil seperti to-do list untuk latihan. Gunakan
-            dokumentasi resmi React dan manfaatkan React Developer Tools untuk
-            debugging. Terakhir, bergabunglah dengan komunitas agar semangat
-            belajar tetap terjaga.
-          </Text>
+          <Text style={styles.title}>{note?.title}</Text>
+          <Text style={styles.date}>{note?.date}</Text>
+          <Text style={styles.description}>{note?.description}</Text>
         </View>
       </ScrollView>
       <View style={styles.cardButton}>
@@ -59,7 +54,6 @@ const styles = StyleSheet.create({
     height: 56,
     alignItems: "center",
     gap: 8,
-    cursor: "pointer",
   },
   appBarTitle: {
     fontSize: 20,
