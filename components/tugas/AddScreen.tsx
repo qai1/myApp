@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
   Image,
@@ -19,14 +20,15 @@ const images = [
 ];
 
 export default function AddScreen() {
+  const router = useRouter();
   const [selectedImage, setSelectedImage] = useState<number>(0);
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.appBar}>
+      <TouchableOpacity style={styles.appBar}>
         <Ionicons name="arrow-back" size={24} color="#FF5B13" />
         <Text style={styles.appBarTitle}>Note Details</Text>
-      </View>
+      </TouchableOpacity>
       <View style={styles.form}>
         <TextInput
           style={styles.inputTitle}

@@ -1,6 +1,7 @@
+import { notes } from "@/data/notesData";
 import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
-import { useState } from "react";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { useEffect, useState } from "react";
 import {
   Image,
   ScrollView,
@@ -19,21 +20,37 @@ const images = [
   require("@/assets/images/image-4.png"),
 ];
 
-export default function AddScreen() {
+export default function UpdateScreen() {
   const router = useRouter();
+  const { id } = useLocalSearchParams();
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+
+  const note = notes.find((note) => note.id === Number(id));
+
   const [selectedImage, setSelectedImage] = useState<number>(0);
+
+  useEffect(() => {
+    if (note) {
+      setTitle(note?.title);
+      setDescription(note?.description);
+    }
+  }, [note]);
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity style={styles.appBar} onPress={() => router.back()}>
-        <Ionicons name="arrow-back" size={24} color="#FF5B13" />
+      <View style={styles.appBar}>
+        <TouchableOpacity onPress={() => router.back()}>
+          <Ionicons name="arrow-back" size={24} color="#FF5B13" />
+        </TouchableOpacity>
         <Text style={styles.appBarTitle}>Note Details</Text>
-      </TouchableOpacity>
+      </View>
       <View style={styles.form}>
         <TextInput
           style={styles.inputTitle}
           placeholder="Note Title"
           selectionColor={"#FF5B13"}
+          value={title}
         />
 
         <TextInput
@@ -42,6 +59,7 @@ export default function AddScreen() {
           selectionColor={"#FF5B13"}
           textAlignVertical="top"
           multiline={true}
+          value={description}
         />
 
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -59,8 +77,8 @@ export default function AddScreen() {
           ))}
         </ScrollView>
       </View>
-      <TouchableOpacity style={styles.addButton}>
-        <Text style={{ textAlign: "center", color: "white" }}>Add</Text>
+      <TouchableOpacity style={styles.updateButton}>
+        <Text style={{ textAlign: "center", color: "white" }}>Update</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -88,6 +106,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 4,
     borderColor: "#828282ff",
+    color: "#828282ff",
     padding: 15,
     marginBottom: 10,
   },
@@ -95,6 +114,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 4,
     borderColor: "#828282ff",
+    color: "#828282ff",
     padding: 15,
     marginBottom: 10,
     height: 100,
@@ -117,7 +137,7 @@ const styles = StyleSheet.create({
     borderColor: "#FF8851",
     borderWidth: 2,
   },
-  addButton: {
+  updateButton: {
     marginTop: "auto",
     height: 48,
     backgroundColor: "#FF5B13",

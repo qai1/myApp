@@ -16,14 +16,15 @@ export default function DetailScreen() {
   const { id } = useLocalSearchParams();
 
   const note = notes.find((note) => note.id === Number(id));
-  console.log(note);
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity style={styles.appBar} onPress={() => router.push("/")}>
-        <Ionicons name="arrow-back" size={24} color="#FF5B13" />
+      <View style={styles.appBar}>
+        <TouchableOpacity onPress={() => router.push("/")}>
+          <Ionicons name="arrow-back" size={24} color="#FF5B13" />
+        </TouchableOpacity>
         <Text style={styles.appBarTitle}>Note Details</Text>
-      </TouchableOpacity>
+      </View>
       <ScrollView>
         <Image style={{ width: "100%", height: 190 }} source={note?.image} />
         <View style={styles.content}>
@@ -33,7 +34,10 @@ export default function DetailScreen() {
         </View>
       </ScrollView>
       <View style={styles.cardButton}>
-        <TouchableOpacity style={styles.updateButton}>
+        <TouchableOpacity
+          style={styles.updateButton}
+          onPress={() => router.push(`/update/${note?.id}`)}
+        >
           <Text style={styles.textButton}>Update</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.deleteButton}>
